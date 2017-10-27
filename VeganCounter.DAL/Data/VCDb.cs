@@ -23,16 +23,15 @@ namespace VeganCounter.DAL.Data
         public DbSet<City> Cities { get; set; }
         public DbSet<Vegan> Vegans { get; set; }
 
-        // Add a DbSet for each entity type that you want to include in your model. For more information 
-        // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
-        // public virtual DbSet<MyEntity> MyEntities { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<City>().HasMany(x=>x.Vegan).WithOptional().HasForeignKey(b => b.CityID).WillCascadeOnDelete(false);
+            modelBuilder.Entity<Country>().HasMany(c => c.Vegan).WithOptional().HasForeignKey(b=>b.CountryID).WillCascadeOnDelete(false);
+            modelBuilder.Entity<Country>().HasMany(x => x.City).WithOptional().HasForeignKey(b => b.CountryID).WillCascadeOnDelete(false);
+
+        }
     }
-    
 
-    //public class MyEntity
-    //{
-    //    public int Id { get; set; }
-    //    public string Name { get; set; }
-    //}
-}
