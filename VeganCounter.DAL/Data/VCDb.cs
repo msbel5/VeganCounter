@@ -28,10 +28,11 @@ namespace VeganCounter.DAL.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<City>().HasMany(x=>x.Vegan).WithOptional().HasForeignKey(b => b.CityID).WillCascadeOnDelete(false);
-            modelBuilder.Entity<Country>().HasMany(c => c.Vegan).WithOptional().HasForeignKey(b=>b.CountryID).WillCascadeOnDelete(false);
+            modelBuilder.Entity<City>().HasMany(x => x.Vegan).WithOptional().HasForeignKey(b => b.CityID).WillCascadeOnDelete(false);
+            modelBuilder.Entity<Country>().HasMany(c => c.Vegan).WithOptional().HasForeignKey(b => b.CountryID).WillCascadeOnDelete(false);
             modelBuilder.Entity<Country>().HasMany(x => x.City).WithOptional().HasForeignKey(b => b.CountryID).WillCascadeOnDelete(false);
 
         }
     }
+}
 
