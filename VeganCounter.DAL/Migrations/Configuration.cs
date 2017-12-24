@@ -5,14 +5,14 @@ namespace VeganCounter.DAL.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<VeganCounter.DAL.Data.VCDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<VeganCounter.DAL.Data.VcDbContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(VeganCounter.DAL.Data.VCDbContext context)
+        protected override void Seed(VeganCounter.DAL.Data.VcDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

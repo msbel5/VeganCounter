@@ -1,0 +1,85 @@
+﻿
+
+@model IEnumerable<VeganCounter.BLL.Dtos.VeganDto>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Vegans</h2>
+<p>
+    @Html.ActionLink("New Vegan", "New", "Vegans", null, new { @class = "btn btn-primary" })
+</p>
+
+<div class="table-responsive">
+    <table id="vegan" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Vegan</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#vegan").DataTable({
+                ajax: {
+                    url: "/api/vegans",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function (data, type, vegan) {
+                            return "<a href='/vegans/details/" + vegan.id + "'>" + vegan.nick + "</a>";
+                        }
+                    },
+                    {
+                        data: "country"
+                    },
+                    {
+                        data: "city"
+                    },
+                    {
+                        data: "id",
+                        render: function(data,type,vegan) {
+                            return "<a href='/vegans/edit/" + vegan.id + "'>Edit</a>";
+                        }
+                    },
+                    {
+                        data: "id",
+                        render: function(data,type,vegan) {
+                            return "<button class='btn-link js-delete' data-vegan-id=" + vegan.id + ">Delete</button>";
+                        }
+                    }
+                ]
+            });
+
+            $("#vegan").on("click",".js-delete", function () {
+                var button = $(this);
+                bootbox.confirm("Are you sure you want to delete this vegan?",
+                    function() {
+                        $.ajax({
+                            url: "/api/vegans/" + button.attr("data-vegan-id"),
+                            method: "DELETE",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    });
+            });
+        });
+    </script>
+}
+
+
+

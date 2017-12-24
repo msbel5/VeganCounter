@@ -1,0 +1,48 @@
+﻿@using System.Web.Optimization
+@using VeganCounter.BLL.Dtos
+@model VeganCounter.UI.ViewModels.VeganFormViewModel
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Title</h2>
+
+@using (Html.BeginForm("Save", "Vegans"))
+{
+    @Html.ValidationSummary(true, "Please fix the following error/s.")
+    <div class="form-group">
+        @Html.LabelFor(m => m.Vegan.Nick)
+        @Html.TextBoxFor(m => m.Vegan.Nick, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Vegan.Nick)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Vegan.Email)
+        @Html.TextBoxFor(m => m.Vegan.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Vegan.Email)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Vegan.EmailVerify)
+        @Html.TextBoxFor(m => m.Vegan.EmailVerify, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Vegan.EmailVerify)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Vegan.Country)
+        @Html.TextBoxFor(m => m.Vegan.Country, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Vegan.Country)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Vegan.City)
+        @Html.TextBoxFor(m => m.Vegan.City, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Vegan.City)
+    </div>
+
+    @Html.HiddenFor(c => c.Vegan.Id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
