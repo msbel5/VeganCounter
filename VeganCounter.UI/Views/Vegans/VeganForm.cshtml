@@ -21,8 +21,8 @@
         @Html.TextBoxFor(m => m.Vegan.EmailVerify, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Vegan.EmailVerify)
     </div>
-    @Html.HiddenFor(m => m.Vegan.CityId , new { Value = -1 })
-    @Html.HiddenFor(m => m.Vegan.CountryId , new { Value = -1 })
+    @Html.HiddenFor(m => m.Vegan.CityId , new { Value = 0 })
+    @Html.HiddenFor(m => m.Vegan.City.CountryId , new { Value = 0 })
     @Html.HiddenFor(c => c.Vegan.Id)
     @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>
