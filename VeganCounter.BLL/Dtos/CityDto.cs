@@ -11,9 +11,7 @@ namespace VeganCounter.BLL.Dtos
     public class CityDto
     {
         public int Id { get; set; }
-        [Required]
         public string Name { get; set; }
-        [Required]
         public int CountryId { get; set; }
         public CountryDto Country { get; set; }
     }
