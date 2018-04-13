@@ -58,7 +58,7 @@ namespace VeganCounter.UI.Controllers
             using (var reader = new DatabaseReader(AppDomain.CurrentDomain.BaseDirectory + "/App_Data/GeoLite2-City.mmdb"))
             {
                 var ipAddress = HttpContext.Request.UserHostAddress;
-                CityResponse location = reader.City("ipAddress");
+                CityResponse location = reader.City(ipAddress);
                 
                 if (_cim.Get(location.City.ToString()) != null)
                 {
