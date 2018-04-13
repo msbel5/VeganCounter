@@ -62,9 +62,21 @@
     <Compile Include="Migrations\201712242056416_NickAddedToVegan.Designer.cs">
       <DependentUpon>201712242056416_NickAddedToVegan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804131131102_removednick.cs" />
+    <Compile Include="Migrations\201804131131102_removednick.Designer.cs">
+      <DependentUpon>201804131131102_removednick.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804131940599_addedCityAndCountryTable.cs" />
+    <Compile Include="Migrations\201804131940599_addedCityAndCountryTable.Designer.cs">
+      <DependentUpon>201804131940599_addedCityAndCountryTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\City.cs" />
+    <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Vegan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CityRepository.cs" />
+    <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\VeganRepository.cs" />
   </ItemGroup>
@@ -80,6 +92,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712242056416_NickAddedToVegan.resx">
       <DependentUpon>201712242056416_NickAddedToVegan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804131131102_removednick.resx">
+      <DependentUpon>201804131131102_removednick.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804131940599_addedCityAndCountryTable.resx">
+      <DependentUpon>201804131940599_addedCityAndCountryTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

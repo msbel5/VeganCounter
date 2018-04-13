@@ -8,29 +8,97 @@
 }
 
 <h2>Vegans</h2>
-<p>
-    @Html.ActionLink("New Vegan", "New", "Vegans", null, new { @class = "btn btn-primary" })
-</p>
 
-<div class="table-responsive">
-    <table id="vegan" class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>Vegan</th>
-                <th>Country</th>
-                <th>City</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+
+<div class="row">
+    <div class="col-sm-3 col-md-6">
+        <div class="table-responsive" style="background-color:#F2F2FA">
+            <table id="veganCity" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>City</th>
+                        <th>Country</th>
+                        <th>Number Of Vegans</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-sm-3 col-md-6">
+        <div class="table-responsive" style="background-color: #F0FFFA">
+            <table id="veganCountry" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Country</th>
+                        <th>Number Of Vegans</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
 </div>
+
+
+<div class="row" style="padding-top: 15px">
+
+    <div class="table-responsive" style="background-color: #EBFFFF;">
+        <table id="vegan" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Country</th>
+                    <th>City</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+
+
 
 @section scripts
 {
     <script>
         $(document).ready(function () {
+            var tableCity = $("#veganCity").DataTable({
+                ajax: {
+                    url: "/api/cities",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "city.name"
+                    },
+                    {
+                        data: "city.country.name"
+                    },
+                    {
+                        data: "numberOfVegans"
+                    }
+                ]
+            });
+
+            var tableCountry = $("#veganCountry").DataTable({
+                ajax: {
+                    url: "/api/countries",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "country.name"
+                    },
+                    {
+                        data: "numberOfVegans"
+                    }
+                ]
+            });
+
             var table = $("#vegan").DataTable({
                 ajax: {
                     url: "/api/vegans",
@@ -38,36 +106,36 @@
                 },
                 columns: [
                     {
-                        data: "name",
+                        data: "email",
                         render: function (data, type, vegan) {
-                            return "<a href='/vegans/details/" + vegan.id + "'>" + vegan.nick + "</a>";
+                            return "<a href='/vegans/details/" + vegan.id + "'>" + vegan.email + "</a>";
                         }
                     },
                     {
-                        data: "country"
+                        data: "city.name"
                     },
                     {
-                        data: "city"
+                        data: "city.country.name"
                     },
                     {
                         data: "id",
-                        render: function(data,type,vegan) {
+                        render: function (data, type, vegan) {
                             return "<a href='/vegans/edit/" + vegan.id + "'>Edit</a>";
                         }
                     },
                     {
                         data: "id",
-                        render: function(data,type,vegan) {
+                        render: function (data, type, vegan) {
                             return "<button class='btn-link js-delete' data-vegan-id=" + vegan.id + ">Delete</button>";
                         }
                     }
                 ]
             });
 
-            $("#vegan").on("click",".js-delete", function () {
+            $("#vegan").on("click", ".js-delete", function () {
                 var button = $(this);
                 bootbox.confirm("Are you sure you want to delete this vegan?",
-                    function() {
+                    function () {
                         $.ajax({
                             url: "/api/vegans/" + button.attr("data-vegan-id"),
                             method: "DELETE",

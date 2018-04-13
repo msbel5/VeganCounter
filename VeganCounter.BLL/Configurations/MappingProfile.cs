@@ -15,6 +15,12 @@ namespace VeganCounter.BLL.Configurations
         {
             CreateMap<Vegan, VeganDto>();
             CreateMap<VeganDto, Vegan>().ForMember(x => x.Id, opt => opt.Ignore());
+
+            CreateMap<Country, CountryDto>();
+            CreateMap<CountryDto, Country>().ForMember(x => x.Id, opt => opt.Ignore());
+
+            CreateMap<City, CityDto>();
+            CreateMap<CityDto, City>().ForMember(x => x.Id, opt => opt.Ignore());
         }
     }
 }

@@ -34,6 +34,12 @@ namespace VeganCounter.BLL.Services
             return Mapper.Map<IEnumerable<Vegan>, IEnumerable<VeganDto>>(veganInDb);
         }
 
+        public IEnumerable<VeganDto> EagerGetAll()
+        {
+            var veganInDb = _repository.EagerGetAll();
+            return Mapper.Map<IEnumerable<Vegan>, IEnumerable<VeganDto>>(veganInDb);
+        }
+
         public IEnumerable<VeganDto> Find(Expression<Func<VeganDto, bool>> predicate)
         {
             var mappedPredicate =
@@ -61,11 +67,11 @@ namespace VeganCounter.BLL.Services
             return _repository.Update(entityId, mappedDto);
         }
 
-        public bool Remove(int Id)
+        public bool Remove(int id)
         {
             //var mappedDto = Mapper.Map<VeganDto, Vegan>(entity);
             //int dtoId = mappedDto.Id;
-            return _repository.Remove(Id);
+            return _repository.Remove(id);
         }
 
         public bool RemoveRange(IEnumerable<VeganDto> entities)

@@ -21,10 +21,12 @@ namespace VeganCounter.UI.Controllers.Api
         // GET /api/vegans
         public IHttpActionResult GetVegans()
         {
-            var veganDtos = _vm.GetAll();
+            var veganDtos = _vm.EagerGetAll();
 
             return Ok(veganDtos);
         }
+
+
 
         // GET /api/vegans/1
 

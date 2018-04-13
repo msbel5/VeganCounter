@@ -15,7 +15,7 @@ namespace VeganCounter.BLL.Interfaces
         bool Add(TEntity entity);
         bool AddRange(IEnumerable<TEntity> entities);
         bool Update(int entityId, TEntity entity);
-        bool Remove(int Id);
+        bool Remove(int id);
         bool RemoveRange(IEnumerable<TEntity> entities);
     }
 }
